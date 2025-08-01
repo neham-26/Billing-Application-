@@ -45,6 +45,12 @@ For small to medium businesses:
 2. Core features
 3. Invoices, payments, reports
 
+##Overview 
+<img width="1903" height="891" alt="image" src="https://github.com/user-attachments/assets/5856ae2d-5618-4009-b906-e911d68aeda7" />
+<img width="712" height="680" alt="image" src="https://github.com/user-attachments/assets/cf62f836-829e-438c-9b4d-22d9c31393ab" />
+<img width="647" height="784" alt="image" src="https://github.com/user-attachments/assets/ba240e42-5a26-4fd4-8154-bec0841b626d" />
+
+
 ## Completion Criteria
 - All features working and tested
 - Project completed on time
