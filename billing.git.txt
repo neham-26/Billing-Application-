@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Billing App - Login & Registration Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+    }
+    .container {
+      max-width: 960px;
+      margin: auto;
+    }
+    .tab-btn {
+      @apply py-3 px-5 text-lg font-semibold cursor-pointer rounded-md transition-colors;
+    }
+    .tab-btn.active {
+      @apply bg-blue-600 text-white shadow-lg;
+    }
+    .tab-btn:not(.active):hover {
+      @apply bg-blue-100 text-blue-700;
+    }
+    .input-field {
+      @apply w-full border border-gray-300 rounded-md px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500;
+    }
+    .btn-primary {
+      @apply bg-blue-600 text-white py-2 px-6 rounded-md font-semibold hover:bg-blue-700 transition;
+    }
+    .error-msg {
+      @apply text-red-600 text-sm mt-1;
+    }
+    .success-msg {
+      @apply text-green-700 text-sm mt-2 font-semibold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-10 px-6">
+    <header class="mb-10 text-center">
+      <h1 class="text-4xl font-extrabold text-gray-900">Billing Application</h1>
+      <p class="mt-2 max-w-lg mx-auto text-gray-700 text-lg">
+        Dashboard: Login & Registration
+      </p>
+    </header>
+
+    <!-- Tabs for switching forms -->
+    <nav class="flex justify-center mb-8 space-x-4">
+      <button id="loginTab" class="tab-btn active" aria-selected="true" aria-controls="loginForm" role="tab" tabindex="0">Login</button>
+      <button id="registerTab" class="tab-btn" aria-selected="false" aria-controls="registerForm" role="tab" tabindex="-1">Register</button>
+    </nav>
+
+    <!-- Login Form -->
+    <section id="loginForm" role="tabpanel" tabindex="0" aria-labelledby="loginTab">
+      <form id="loginFormElem" class="max-w-md mx-auto bg-white shadow-md rounded-lg p-8 space-y-6" novalidate>
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center">User Login</h2>
+
+        <div>
+          <label for="loginEmail" class="block text-gray-700 font-medium mb-1">Email</label>
+          <input id="loginEmail" name="loginEmail" type="email" autocomplete="email" placeholder="you@example.com" required class="input-field" />
+          <p class="error-msg" id="loginEmailError" aria-live="polite"></p>
+        </div>
+
+        <div>
+          <label for="loginPassword" class="block text-gray-700 font-medium mb-1">Password</label>
+          <input id="loginPassword" name="loginPassword" type="password" autocomplete="current-password" placeholder="********" required class="input-field" minlength="6" />
+          <p class="error-msg" id="loginPasswordError" aria-live="polite"></p>
+        </div>
+
+        <div>
+          <label for="loginRole" class="block text-gray-700 font-medium mb-1">User Role</label>
+          <select id="loginRole" name="loginRole" required class="input-field" aria-describedby="roleHelp">
+            <option value="" disabled selected>Select role</option>
+            <option value="admin">Admin</option>
+            <option value="accountant">Accountant</option>
+            <option value="customer">Customer</option>
+          </select>
+          <p class="error-msg" id="loginRoleError" aria-live="polite"></p>
+          <p id="roleHelp" class="mt-1 text-sm text-gray-500 italic">Choose your role for access control.</p>
+        </div>
+
+        <button type="submit" class="btn-primary w-full" aria-label="Login to billing application">Login</button>
+        <p class="success-msg" id="loginSuccess" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <!-- Registration Form -->
+    <section id="registerForm" role="tabpanel" tabindex="0" aria-labelledby="registerTab" class="hidden">
+      <form id="registerFormElem" class="max-w-md mx-auto bg-white shadow-md rounded-lg p-8 space-y-6" novalidate>
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center">User Registration</h2>
+
+        <div>
+          <label for="registerName" class="block text-gray-700 font-medium mb-1">Full Name</label>
+          <input id="registerName" name="registerName" type="text" autocomplete="name" placeholder="Your Full Name" required class="input-field" minlength="3" />
+          <p class="error-msg" id="registerNameError" aria-live="polite"></p>
+        </div>
+
+        <div>
+          <label for="registerEmail" class="block text-gray-700 font-medium mb-1">Email</label>
+          <input id="registerEmail" name="registerEmail" type="email" autocomplete="email" placeholder="you@example.com" required class="input-field" />
+          <p class="error-msg" id="registerEmailError" aria-live="polite"></p>
+        </div>
+
+        <div>
+          <label for="registerPassword" class="block text-gray-700 font-medium mb-1">Password</label>
+          <input id="registerPassword" name="registerPassword" type="password" autocomplete="new-password" placeholder="********" required class="input-field" minlength="6" />
+          <p class="error-msg" id="registerPasswordError" aria-live="polite"></p>
+        </div>
+
+        <div>
+          <label for="registerConfirmPassword" class="block text-gray-700 font-medium mb-1">Confirm Password</label>
+          <input id="registerConfirmPassword" name="registerConfirmPassword" type="password" autocomplete="new-password" placeholder="********" required class="input-field" minlength="6" />
+          <p class="error-msg" id="registerConfirmPasswordError" aria-live="polite"></p>
+        </div>
+
+        <div>
+          <label for="registerRole" class="block text-gray-700 font-medium mb-1">User Role</label>
+          <select id="registerRole" name="registerRole" required class="input-field" aria-describedby="regRoleHelp">
+            <option value="" disabled selected>Select role</option>
+            <option value="admin">Admin</option>
+            <option value="accountant">Accountant</option>
+            <option value="customer">Customer</option>
+          </select>
+          <p class="error-msg" id="registerRoleError" aria-live="polite"></p>
+          <p id="regRoleHelp" class="mt-1 text-sm text-gray-500 italic">Admin, Accountant or Customer</p>
+        </div>
+
+        <button type="submit" class="btn-primary w-full" aria-label="Register new user on the billing application">Register</button>
+        <p class="success-msg" id="registerSuccess" aria-live="polite"></p>
+      </form>
+    </section>
+  </div>
+
+  <script>
+    // Tab switching logic
+    const loginTab = document.getElementById('loginTab');
+    const registerTab = document.getElementById('registerTab');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+
+    function activateTab(tabToActivate) {
+      if (tabToActivate === 'login') {
+        loginTab.classList.add('active');
+        loginTab.setAttribute('aria-selected', 'true');
+        loginTab.setAttribute('tabindex', '0');
+
+        registerTab.classList.remove('active');
+        registerTab.setAttribute('aria-selected', 'false');
+        registerTab.setAttribute('tabindex', '-1');
+
+        loginForm.classList.remove('hidden');
+        registerForm.classList.add('hidden');
+        loginForm.focus();
+      } else {
+        registerTab.classList.add('active');
+        registerTab.setAttribute('aria-selected', 'true');
+        registerTab.setAttribute('tabindex', '0');
+
+        loginTab.classList.remove('active');
+        loginTab.setAttribute('aria-selected', 'false');
+        loginTab.setAttribute('tabindex', '-1');
+
+        registerForm.classList.remove('hidden');
+        loginForm.classList.add('hidden');
+        registerForm.focus();
+      }
+    }
+
+    loginTab.addEventListener('click', () => activateTab('login'));
+    registerTab.addEventListener('click', () => activateTab('register'));
+
+    // Login form validation and submission simulation
+    const loginFormElem = document.getElementById('loginFormElem');
+    const loginEmail = document.getElementById('loginEmail');
+    const loginPassword = document.getElementById('loginPassword');
+    const loginRole = document.getElementById('loginRole');
+    const loginEmailError = document.getElementById('loginEmailError');
+    const loginPasswordError = document.getElementById('loginPasswordError');
+    const loginRoleError = document.getElementById('loginRoleError');
+    const loginSuccess = document.getElementById('loginSuccess');
+
+    loginFormElem.addEventListener('submit', e => {
+      e.preventDefault();
+      // Clear previous errors
+      loginEmailError.textContent = '';
+      loginPasswordError.textContent = '';
+      loginRoleError.textContent = '';
+      loginSuccess.textContent = '';
+
+      let valid = true;
+
+      if (!loginEmail.value.trim()) {
+        loginEmailError.textContent = 'Email is required.';
+        valid = false;
+      } else if (!validateEmail(loginEmail.value.trim())) {
+        loginEmailError.textContent = 'Email format is invalid.';
+        valid = false;
+      }
+
+      if (!loginPassword.value.trim()) {
+        loginPasswordError.textContent = 'Password is required.';
+        valid = false;
+      } else if (loginPassword.value.trim().length < 6) {
+        loginPasswordError.textContent = 'Password must be at least 6 characters.';
+        valid = false;
+      }
+
+      if (!loginRole.value) {
+        loginRoleError.textContent = 'Please select a user role.';
+        valid = false;
+      }
+
+      if (valid) {
+        // Simulate login success - realistically here would be API call
+        loginSuccess.textContent = `Login successful for ${loginRole.value.charAt(0).toUpperCase() + loginRole.value.slice(1)} role. Redirecting to dashboard...`;
+        setTimeout(() => {
+          loginSuccess.textContent = '';
+          loginFormElem.reset();
+          // Could redirect or show dashboard here
+        }, 3000);
+      }
+    });
+
+    // Registration form validation and submission simulation
+    const registerFormElem = document.getElementById('registerFormElem');
+    const registerName = document.getElementById('registerName');
+    const registerEmail = document.getElementById('registerEmail');
+    const registerPassword = document.getElementById('registerPassword');
+    const registerConfirmPassword = document.getElementById('registerConfirmPassword');
+    const registerRole = document.getElementById('registerRole');
+
+    const registerNameError = document.getElementById('registerNameError');
+    const registerEmailError = document.getElementById('registerEmailError');
+    const registerPasswordError = document.getElementById('registerPasswordError');
+    const registerConfirmPasswordError = document.getElementById('registerConfirmPasswordError');
+    const registerRoleError = document.getElementById('registerRoleError');
+    const registerSuccess = document.getElementById('registerSuccess');
+
+    registerFormElem.addEventListener('submit', e => {
+      e.preventDefault();
+      // Clear previous errors
+      registerNameError.textContent = '';
+      registerEmailError.textContent = '';
+      registerPasswordError.textContent = '';
+      registerConfirmPasswordError.textContent = '';
+      registerRoleError.textContent = '';
+      registerSuccess.textContent = '';
+
+      let valid = true;
+
+      if (!registerName.value.trim()) {
+        registerNameError.textContent = 'Full name is required.';
+        valid = false;
+      } else if (registerName.value.trim().length < 3) {
+        registerNameError.textContent = 'Full name must be at least 3 characters.';
+        valid = false;
+      }
+
+      if (!registerEmail.value.trim()) {
+        registerEmailError.textContent = 'Email is required.';
+        valid = false;
+      } else if (!validateEmail(registerEmail.value.trim())) {
+        registerEmailError.textContent = 'Email format is invalid.';
+        valid = false;
+      }
+
+      if (!registerPassword.value.trim()) {
+        registerPasswordError.textContent = 'Password is required.';
+        valid = false;
+      } else if (registerPassword.value.trim().length < 6) {
+        registerPasswordError.textContent = 'Password must be at least 6 characters.';
+        valid = false;
+      }
+
+      if (!registerConfirmPassword.value.trim()) {
+        registerConfirmPasswordError.textContent = 'Please confirm your password.';
+        valid = false;
+      } else if (registerPassword.value.trim() !== registerConfirmPassword.value.trim()) {
+        registerConfirmPasswordError.textContent = 'Passwords do not match.';
+        valid = false;
+      }
+
+      if (!registerRole.value) {
+        registerRoleError.textContent = 'Please select a user role.';
+        valid = false;
+      }
+
+      if (valid) {
+        // Simulate registration success - realistically here would be API call
+        registerSuccess.textContent = `Registration successful for ${registerRole.value.charAt(0).toUpperCase() + registerRole.value.slice(1)} role. You can now log in.`;
+        setTimeout(() => {
+          registerSuccess.textContent = '';
+          registerFormElem.reset();
+          activateTab('login');
+        }, 4000);
+      }
+    });
+
+    // Basic email validation helper
+    function validateEmail(email) {
+      // Simple regex for demo purposes
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+  </script>
+</body>
+</html>
+
